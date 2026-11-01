@@ -15,6 +15,7 @@
   --cyg: #2ee6d0;
   --mg: #2563eb;
   --mgg: #4f8cff;
+  --card-line: color-mix(in srgb, var(--cy) 22%, var(--line));
   --tag: #e4eefa;
   --ok: #0f7a4d;
   --f-d: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
@@ -718,7 +719,9 @@ body.m3d #classic {
 #classic .ksc {
   position: relative;
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.22);
   border-radius: 16px;
   padding: 24px;
   overflow: hidden;
@@ -729,21 +732,6 @@ body.m3d #classic {
 #classic .ksc:hover {
   border-color: var(--cy);
   transform: translateY(-2px);
-}
-#classic .ksc::after {
-  content: "";
-  position: absolute;
-  right: -40px;
-  top: -40px;
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--cyg) 22%, transparent),
-    transparent 70%
-  );
-  pointer-events: none;
 }
 #classic .kscn {
   font: 700 12px var(--f-m);
@@ -785,7 +773,9 @@ body.m3d #classic {
     color-mix(in srgb, var(--mgg) 10%, var(--panel)),
     var(--panel) 60%
   );
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.22);
   border-radius: 18px;
   padding: 30px;
 }
@@ -837,7 +827,9 @@ body.m3d #classic {
   align-items: center;
   gap: 16px;
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.22);
   border-radius: 16px;
   padding: 18px 20px;
   min-width: 0;
@@ -920,19 +912,14 @@ body.m3d #classic {
     color-mix(in srgb, var(--cyg) 10%, var(--panel)),
     var(--panel) 60%
   );
-  border: 1px solid color-mix(in srgb, var(--cy) 50%, var(--line));
+  border: 1px solid transparent;
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.22);
   border-radius: 20px;
   padding: 32px;
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
-}
-#classic .kfeat::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--cyg), var(--mgg));
 }
 #classic .kfl {
   display: flex;
@@ -1026,7 +1013,9 @@ body.m3d #classic {
 }
 #classic .kpc2 {
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.22);
   border-radius: 18px;
   overflow: hidden;
   display: flex;
@@ -1126,12 +1115,6 @@ body.m3d #classic {
 }
 #classic {
   counter-reset: ks;
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--ink) 9%, transparent) 1px,
-    transparent 1.2px
-  );
-  background-size: 26px 26px;
-  background-attachment: local;
 }
 #classic .kwrap {
   max-width: 1080px;
@@ -1147,35 +1130,6 @@ body.m3d #classic {
   position: relative;
   padding-block: 96px 56px;
   isolation: isolate;
-}
-#classic .kglowbg {
-  position: absolute;
-  inset: -60px -10vw auto -10vw;
-  height: 560px;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(
-      520px 320px at 18% 30%,
-      color-mix(in srgb, var(--cyg) 26%, transparent),
-      transparent 70%
-    ),
-    radial-gradient(
-      560px 340px at 82% 20%,
-      color-mix(in srgb, var(--mgg) 22%, transparent),
-      transparent 70%
-    ),
-    radial-gradient(
-      480px 300px at 55% 90%,
-      color-mix(in srgb, #38bdf8 20%, transparent),
-      transparent 70%
-    );
-  filter: blur(10px);
-  animation: kdrift 14s ease-in-out infinite alternate;
-}
-@keyframes kdrift {
-  to {
-    transform: translate3d(20px, -14px, 0) scale(1.05);
-  }
 }
 #classic .kstatus {
   display: inline-flex;
@@ -1314,7 +1268,6 @@ body.m3d #classic {
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  #classic .kglowbg,
   #classic .kstatus i {
     animation: none;
   }
