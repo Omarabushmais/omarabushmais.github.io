@@ -604,7 +604,6 @@ body.m3d #classic {
   opacity: 0.7;
 }
 #classic .kpc:hover {
-  border-color: var(--cy);
   transform: translateY(-2px);
 }
 #classic .kpc.kf {
@@ -730,7 +729,6 @@ body.m3d #classic {
     transform 0.2s;
 }
 #classic .ksc:hover {
-  border-color: var(--cy);
   transform: translateY(-2px);
 }
 #classic .kscn {
@@ -834,9 +832,6 @@ body.m3d #classic {
   padding: 18px 20px;
   min-width: 0;
   transition: border-color 0.2s;
-}
-#classic .kcc:hover {
-  border-color: var(--cy);
 }
 #classic .kci {
   flex: none;
@@ -1026,7 +1021,6 @@ body.m3d #classic {
   min-width: 0;
 }
 #classic .kpc2:hover {
-  border-color: var(--cy);
   transform: translateY(-3px);
 }
 #classic .kart {
