@@ -1106,7 +1106,12 @@ body.m3d #classic {
   counter-reset: ks;
 }
 #classic .kwrap {
-  max-width: 1080px;
+  max-width: 70vw;
+}
+@media (max-width: 900px) {
+  #classic .kwrap {
+    max-width: none;
+  }
 }
 /* ============================================================
    HERO + REDESIGN PASS  (big name, stats row, numbered headings, scroll reveal). These rules come last, so they refine the earlier ones above.
