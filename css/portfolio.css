@@ -1,0 +1,1335 @@
+/* ============================================================
+   portfolio.css  -  NORMAL MODE (the recruiter-friendly page)
+   Everything here is scoped under #classic. Colors come from the
+   tokens defined on #classic (ocean blue theme). The rules are
+   layered: later rules refine earlier ones, so keep the order.
+   ============================================================ */
+
+#classic {
+  --bg: #f1f7fd;
+  --panel: #ffffff;
+  --ink: #0a1b33;
+  --mut: #53698a;
+  --line: #d3e0ef;
+  --cy: #0a7d8c;
+  --cyg: #2ee6d0;
+  --mg: #2563eb;
+  --mgg: #4f8cff;
+  --tag: #e4eefa;
+  --ok: #0f7a4d;
+  --f-d: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --f-b: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  --f-m: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+:root:not([data-theme="light"]) #classic {
+  --bg: #06142b;
+  --panel: #0c2140;
+  --ink: #e8f3ff;
+  --mut: #8fa9c9;
+  --line: #1b3a63;
+  --cy: #2ee6d0;
+  --cyg: #2ee6d0;
+  --mg: #4f8cff;
+  --mgg: #4f8cff;
+  --tag: #11294d;
+  --ok: #5dffb4;
+  color-scheme: dark;
+}
+:root[data-theme="dark"] #classic {
+  --bg: #06142b;
+  --panel: #0c2140;
+  --ink: #e8f3ff;
+  --mut: #8fa9c9;
+  --line: #1b3a63;
+  --cy: #2ee6d0;
+  --cyg: #2ee6d0;
+  --mg: #4f8cff;
+  --mgg: #4f8cff;
+  --tag: #11294d;
+  --ok: #5dffb4;
+  color-scheme: dark;
+}
+#classic * {
+  box-sizing: border-box;
+}
+#classic {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--f-b);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+#classic a {
+  color: inherit;
+}
+#classic .kwrap {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+#classic h1,
+#classic h2,
+#classic h3 {
+  font-family: var(--f-d);
+  text-wrap: balance;
+  line-height: 1.1;
+  margin: 0;
+}
+#classic :focus-visible {
+  outline: 2px solid var(--cy);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+/* ============================================================
+   TOP BAR  (sticky bar, nav links, glowing "Try 3D mode" button)
+   ============================================================ */
+
+#classic .kbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px
+    max(16px, env(safe-area-inset-left, 0px));
+}
+#classic .kbar .kwrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+#classic .klogo {
+  font: 700 18px var(--f-d);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+#classic .knav {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+#classic .knav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mut);
+  text-decoration: none;
+  padding: 6px 11px;
+  border-radius: 8px;
+}
+#classic .knav a:hover {
+  color: var(--ink);
+  background: var(--tag);
+}
+#classic .ktry {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 14px var(--f-b);
+  color: #04121a;
+  text-decoration: none;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: linear-gradient(100deg, var(--cyg), #38bdf8 55%, var(--mgg));
+  box-shadow:
+    0 0 0 1px #ffffff55 inset,
+    0 0 18px #2ee6d0aa,
+    0 0 34px #4f8cff55;
+  animation: kglow 2.4s ease-in-out infinite;
+  white-space: nowrap;
+}
+#classic .ktry:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+#classic .ktry svg {
+  width: 16px;
+  height: 16px;
+}
+@keyframes kglow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px #ffffff55 inset,
+      0 0 14px #2ee6d099,
+      0 0 26px #4f8cff33;
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px #ffffff77 inset,
+      0 0 26px #2ee6d0ee,
+      0 0 50px #4f8cff99;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #classic .ktry {
+    animation: none;
+  }
+  #classic html {
+    scroll-behavior: auto;
+  }
+}
+@media (max-width: 760px) {
+  #classic .knav {
+    display: none;
+  }
+  #classic .ktry {
+    margin-left: auto;
+  }
+}
+#classic .khero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  padding-block: 64px 40px;
+}
+#classic .keyebrow {
+  font: 500 13px var(--f-m);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cy);
+  margin: 0 0 14px;
+}
+#classic .khero h1 {
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+#classic .ksub {
+  font: 600 clamp(18px, 2.4vw, 22px) / 1.35 var(--f-d);
+  color: var(--mut);
+  margin: 14px 0 0;
+}
+#classic .klead {
+  max-width: 56ch;
+  margin: 20px 0 0;
+  font-size: 17px;
+}
+#classic .kcta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+#classic .kbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 15px var(--f-b);
+  text-decoration: none;
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+}
+#classic .kbtn:hover {
+  border-color: var(--cy);
+}
+#classic .kbtn.kp {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+#classic .kbtn.kp:hover {
+  opacity: 0.88;
+}
+#classic .kfacts {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 6px 20px;
+}
+#classic .kfacts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+#classic .kfacts div:last-child {
+  border: 0;
+}
+#classic .kfacts span {
+  font: 500 12px var(--f-m);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--mut);
+  padding-top: 3px;
+}
+#classic .kfacts b {
+  font-weight: 700;
+  text-align: right;
+}
+@media (max-width: 820px) {
+  #classic .khero {
+    grid-template-columns: 1fr;
+    padding-block: 40px 24px;
+  }
+}
+/* ============================================================
+   SECTIONS  (shared spacing and headings)
+   ============================================================ */
+
+#classic section {
+  padding-block: 56px 8px;
+  scroll-margin-top: 70px;
+}
+#classic .ksh {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+#classic .ksh h2 {
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+#classic .ksh p {
+  margin: 0;
+  color: var(--mut);
+  font-size: 15px;
+}
+#classic .kpg {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+#classic .kpc {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+#classic .kpc.kf {
+  grid-column: 1/-1;
+}
+#classic .kpc h3 {
+  font-size: 22px;
+  font-weight: 700;
+}
+#classic .ktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+#classic .kflag {
+  font: 500 12px var(--f-m);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #04121a;
+  background: var(--cyg);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+#classic .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+#classic .ktag {
+  font: 500 12.5px var(--f-m);
+  background: var(--tag);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+#classic .kpc ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#classic .kpc li::marker {
+  color: var(--cy);
+}
+#classic .klinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+#classic .klinks a {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--cy);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+#classic .kpc.kf ul {
+  columns: 2;
+  column-gap: 32px;
+  display: block;
+}
+#classic .kpc.kf li {
+  break-inside: avoid;
+  margin-bottom: 6px;
+}
+@media (max-width: 760px) {
+  #classic .kpg {
+    grid-template-columns: 1fr;
+  }
+  #classic .kpc.kf ul {
+    columns: 1;
+  }
+}
+/* ============================================================
+   EXPERIENCE  (timeline)
+   ============================================================ */
+
+#classic .ktl {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid var(--line);
+  margin-left: 6px;
+}
+#classic .kti {
+  position: relative;
+  padding: 0 0 30px 28px;
+}
+#classic .kti::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--cy);
+}
+#classic .kti:last-child {
+  padding-bottom: 0;
+}
+#classic .kwhen {
+  font: 500 13px var(--f-m);
+  color: var(--mut);
+}
+#classic .kti h3 {
+  font-size: 20px;
+  margin: 4px 0 2px;
+}
+#classic .kco {
+  color: var(--mut);
+  margin-bottom: 8px;
+}
+#classic .kti ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 70ch;
+}
+#classic .ksk {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+#classic .ksk div {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+}
+#classic .ksk h3 {
+  font: 700 13px var(--f-m);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mut);
+  margin-bottom: 12px;
+}
+@media (max-width: 640px) {
+  #classic .ksk {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================================================
+   GAME DEV  (HTU_Journey card)
+   ============================================================ */
+
+#classic .kgd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+}
+#classic .kgd h3 {
+  font-size: 20px;
+}
+#classic .kgd p {
+  margin: 4px 0 0;
+  color: var(--mut);
+  max-width: 52ch;
+}
+#classic .kct {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+#classic .kct div {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  min-width: 0;
+}
+#classic .kct small {
+  display: block;
+  font: 500 12px var(--f-m);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--mut);
+  margin-bottom: 6px;
+}
+#classic .kct b {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+#classic .krow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+@media (max-width: 760px) {
+  #classic .kct {
+    grid-template-columns: 1fr;
+  }
+}
+#classic footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: var(--mut);
+  font-size: 14px;
+}
+#classic {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--f-b);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0s 0s;
+}
+body.m3d #classic {
+  opacity: 0;
+  transform: scale(1.015);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0s 0.35s;
+}
+#classic .kbar {
+  top: 0;
+  padding-top: calc(10px + env(safe-area-inset-top, 0px));
+}
+#classic .khero h1 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: clamp(38px, 6.4vw, 64px);
+  line-height: 1.05;
+}
+#classic h2,
+#classic h3 {
+  font-weight: 700;
+}
+#classic button {
+  font-family: var(--f-b);
+}
+#classic .ktry {
+  border: 0;
+  cursor: pointer;
+}
+#classic .kpg {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+#classic .kpc {
+  flex-direction: row;
+  gap: 22px;
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+#classic .kpc::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(var(--cyg), var(--mgg));
+  opacity: 0.7;
+}
+#classic .kpc:hover {
+  border-color: var(--cy);
+  transform: translateY(-2px);
+}
+#classic .kpc.kf {
+  border-color: color-mix(in srgb, var(--cy) 55%, var(--line));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cyg) 9%, var(--panel)),
+    var(--panel) 55%
+  );
+}
+#classic .kpn {
+  font: 700 14px var(--f-m);
+  color: var(--cy);
+  padding-top: 6px;
+  min-width: 26px;
+}
+#classic .kpb {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  flex: 1;
+}
+#classic .ksum {
+  margin: 0;
+  color: var(--mut);
+  font-size: 16px;
+  max-width: 62ch;
+}
+#classic .kpc ul {
+  columns: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#classic .kpc li {
+  position: relative;
+  padding-left: 22px;
+  break-inside: auto;
+  margin: 0;
+}
+#classic .kpc li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--cy);
+  opacity: 0.85;
+  transform: rotate(45deg);
+}
+#classic .kpc.kf ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 28px;
+}
+#classic .kt {
+  transition: background 0.2s;
+}
+#classic .klinks {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+#classic .klk {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 14px var(--f-b);
+  text-decoration: none;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+#classic .klk:hover {
+  border-color: var(--cy);
+  color: var(--cy);
+}
+#classic .klk svg,
+#classic .kbtn svg {
+  width: 15px;
+  height: 15px;
+}
+@media (max-width: 760px) {
+  #classic .kpc {
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px;
+  }
+  #classic .kpc.kf ul {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================================================
+   SKILLS  (four cards with chips)
+   ============================================================ */
+
+#classic .kskg {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+#classic .ksc {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+#classic .ksc:hover {
+  border-color: var(--cy);
+  transform: translateY(-2px);
+}
+#classic .ksc::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--cyg) 22%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+#classic .kscn {
+  font: 700 12px var(--f-m);
+  color: var(--cy);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+#classic .ksc h3 {
+  font: 700 20px var(--f-d);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+#classic .ksc p {
+  margin: 4px 0 16px;
+  color: var(--mut);
+  font-size: 14.5px;
+}
+#classic .ksc .kt {
+  font-size: 13.5px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+@media (max-width: 640px) {
+  #classic .kskg {
+    grid-template-columns: 1fr;
+  }
+}
+#classic .kgd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--mgg) 10%, var(--panel)),
+    var(--panel) 60%
+  );
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 30px;
+}
+#classic .kgdt {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 360px;
+  min-width: 0;
+  align-items: flex-start;
+}
+#classic .kgdt h3 {
+  font: 700 clamp(26px, 4vw, 34px) var(--f-d);
+  letter-spacing: -0.02em;
+}
+#classic .kgdt p {
+  margin: 0;
+  max-width: 60ch;
+  font-size: 16.5px;
+}
+#classic .kgdt .kflag {
+  background: var(--mgg);
+  color: #fff;
+}
+#classic .kgda {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+#classic .kgda small {
+  color: var(--mut);
+}
+#classic .kgda .kbtn {
+  padding: 14px 22px;
+  font-size: 16px;
+}
+/* ============================================================
+   CONTACT  (email, phone, LinkedIn, GitHub cards)
+   ============================================================ */
+
+#classic .kcg {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+#classic .kcc {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 20px;
+  min-width: 0;
+  transition: border-color 0.2s;
+}
+#classic .kcc:hover {
+  border-color: var(--cy);
+}
+#classic .kci {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--tag);
+  color: var(--cy);
+}
+#classic .kci svg {
+  width: 22px;
+  height: 22px;
+}
+#classic .kcb {
+  flex: 1;
+  min-width: 0;
+}
+#classic .kcb small {
+  display: block;
+  font: 500 12px var(--f-m);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mut);
+}
+#classic .kcb b {
+  display: block;
+  font: 700 17px var(--f-b);
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+#classic .kcc .kbtn {
+  flex: none;
+  padding: 9px 14px;
+  font-size: 14px;
+}
+#classic .kloc {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  color: var(--mut);
+}
+#classic .kloc svg {
+  width: 18px;
+  height: 18px;
+  color: var(--cy);
+}
+@media (max-width: 760px) {
+  #classic .kcg {
+    grid-template-columns: 1fr;
+  }
+}
+#classic .ktags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+#classic .ksc .ktags {
+  gap: 8px;
+}
+/* ============================================================
+   PROJECTS  (featured Safwa card with flow diagram, then three cards)
+   ============================================================ */
+
+#classic .kfeat {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 32px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cyg) 10%, var(--panel)),
+    var(--panel) 60%
+  );
+  border: 1px solid color-mix(in srgb, var(--cy) 50%, var(--line));
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+#classic .kfeat::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyg), var(--mgg));
+}
+#classic .kfl {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+#classic .kfl h3 {
+  font: 700 clamp(26px, 3.6vw, 34px) var(--f-d);
+  letter-spacing: -0.02em;
+}
+#classic .kfl ul,
+#classic .kpc2 ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#classic .kfl li,
+#classic .kpc2 li {
+  position: relative;
+  padding-left: 22px;
+}
+#classic .kfl li::before,
+#classic .kpc2 li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--cy);
+  transform: rotate(45deg);
+}
+#classic .kfr {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+#classic .kflow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+#classic .kflow li {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 22px;
+}
+#classic .kflow li:last-child {
+  margin-bottom: 0;
+  border-color: var(--cy);
+}
+#classic .kflow li::after {
+  content: "";
+  position: absolute;
+  left: 28px;
+  top: 100%;
+  height: 22px;
+  width: 2px;
+  background: linear-gradient(var(--cy), var(--mg));
+}
+#classic .kflow li:last-child::after {
+  display: none;
+}
+#classic .kflow b {
+  font: 700 15px var(--f-m);
+  color: var(--cy);
+}
+#classic .kflow span {
+  font-size: 14px;
+  color: var(--mut);
+}
+#classic .kpg2 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+#classic .kpc2 {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+  min-width: 0;
+}
+#classic .kpc2:hover {
+  border-color: var(--cy);
+  transform: translateY(-3px);
+}
+#classic .kart {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cyg) 14%, var(--tag)),
+    color-mix(in srgb, var(--mgg) 12%, var(--tag))
+  );
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+#classic .kart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 96px;
+}
+#classic .kart .a1 {
+  fill: color-mix(in srgb, var(--cy) 30%, transparent);
+  stroke: var(--cy);
+  stroke-width: 1.5;
+}
+#classic .kart .a2 {
+  fill: color-mix(in srgb, var(--mg) 40%, transparent);
+  stroke: var(--mg);
+  stroke-width: 1.5;
+}
+#classic .kart .a3 {
+  fill: color-mix(in srgb, var(--panel) 70%, transparent);
+  stroke: var(--cy);
+  stroke-width: 1.5;
+}
+#classic .kart .a4 {
+  fill: none;
+  stroke: var(--cy);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#classic .kart .pulse {
+  animation: kpulse 1.6s ease-in-out infinite;
+}
+@keyframes kpulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+#classic .kpc2 .kpb {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+#classic .kpc2 h3 {
+  font: 700 22px var(--f-d);
+  letter-spacing: -0.01em;
+}
+#classic .kpc2 .ksum {
+  font-size: 15px;
+}
+#classic .kpc2 .klinks {
+  margin-top: auto;
+}
+#classic .ktop .kpn {
+  padding: 0;
+}
+@media (max-width: 900px) {
+  #classic .kpg2 {
+    grid-template-columns: 1fr;
+  }
+  #classic .kfeat {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #classic .kart .pulse {
+    animation: none;
+  }
+}
+#classic .kt {
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--cyg) 8%, var(--tag));
+  padding: 5px 11px;
+}
+#classic {
+  counter-reset: ks;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--ink) 9%, transparent) 1px,
+    transparent 1.2px
+  );
+  background-size: 26px 26px;
+  background-attachment: local;
+}
+#classic .kwrap {
+  max-width: 1080px;
+}
+/* ============================================================
+   HERO + REDESIGN PASS  (big name, stats row, numbered headings, scroll reveal). These rules come last, so they refine the earlier ones above.
+   ============================================================ */
+
+#classic .kbar {
+  backdrop-filter: blur(14px) saturate(1.3);
+}
+#classic .khero2 {
+  position: relative;
+  padding-block: 96px 56px;
+  isolation: isolate;
+}
+#classic .kglowbg {
+  position: absolute;
+  inset: -60px -10vw auto -10vw;
+  height: 560px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+      520px 320px at 18% 30%,
+      color-mix(in srgb, var(--cyg) 26%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      560px 340px at 82% 20%,
+      color-mix(in srgb, var(--mgg) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      480px 300px at 55% 90%,
+      color-mix(in srgb, #38bdf8 20%, transparent),
+      transparent 70%
+    );
+  filter: blur(10px);
+  animation: kdrift 14s ease-in-out infinite alternate;
+}
+@keyframes kdrift {
+  to {
+    transform: translate3d(20px, -14px, 0) scale(1.05);
+  }
+}
+#classic .kstatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 600 13.5px var(--f-b);
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 80%, transparent);
+  backdrop-filter: blur(6px);
+}
+#classic .kstatus i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 var(--ok);
+  animation: kping 2s infinite;
+}
+@keyframes kping {
+  70% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+#classic .khero2 .keyebrow {
+  margin: 26px 0 12px;
+}
+#classic .khero2 h1 {
+  font: 700 clamp(46px, 9.5vw, 112px) / 0.98 var(--f-d);
+  letter-spacing: -0.04em;
+}
+#classic .khero2 h1 em {
+  font-style: normal;
+  background: linear-gradient(100deg, var(--cyg), #38bdf8 55%, var(--mgg));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+#classic .khero2 .ksub {
+  font: 500 clamp(19px, 2.6vw, 26px) / 1.3 var(--f-b);
+  color: var(--mut);
+  margin: 22px 0 0;
+}
+#classic .khero2 .kcta {
+  margin-top: 34px;
+}
+#classic .kstats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 64px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+#classic .kstat {
+  padding: 22px 22px 22px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#classic .kstat + .kstat {
+  padding-left: 22px;
+  border-left: 1px solid var(--line);
+}
+#classic .kstat b {
+  font: 700 clamp(26px, 3.6vw, 40px) / 1 var(--f-d);
+  letter-spacing: -0.02em;
+}
+#classic .kstat span {
+  font: 500 12.5px var(--f-m);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mut);
+}
+@media (max-width: 760px) {
+  #classic .khero2 {
+    padding-block: 56px 36px;
+  }
+  #classic .kstats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 44px;
+  }
+  #classic .kstat:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  #classic .kstat:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+}
+#classic section {
+  padding-block: 96px 0;
+}
+#classic .ksh {
+  counter-increment: ks;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+#classic .ksh h2 {
+  font: 700 clamp(34px, 5.4vw, 56px) / 1 var(--f-d);
+  letter-spacing: -0.03em;
+}
+#classic .ksh h2::before {
+  content: "0" counter(ks);
+  display: block;
+  font: 500 14px var(--f-m);
+  letter-spacing: 0.1em;
+  color: var(--cy);
+  margin-bottom: 14px;
+}
+#classic .ksh p {
+  font-size: 17px;
+}
+#classic .kti::before {
+  box-shadow: 0 0 12px var(--cyg);
+}
+#classic .kti h3 {
+  font-size: 22px;
+}
+#classic .kr {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+#classic .kr.kin {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  #classic .kglowbg,
+  #classic .kstatus i {
+    animation: none;
+  }
+  #classic .kr {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+#classic {
+  overscroll-behavior: contain;
+}
+@media (prefers-reduced-motion: reduce) {
+  #classic,
+  body.m3d #classic {
+    transition: none;
+  }
+}
