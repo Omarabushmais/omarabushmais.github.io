@@ -2574,6 +2574,24 @@
           bottom: calc(60px + env(safe-area-inset-bottom, 0px));
         }
       }
+      #classic {
+        overscroll-behavior: contain;
+      }
+      #c,
+      #hud,
+      #lb,
+      #dock,
+      #zc {
+        transition: visibility 0s 0s;
+      }
+      body:not(.m3d) #c,
+      body:not(.m3d) #hud,
+      body:not(.m3d) #lb,
+      body:not(.m3d) #dock,
+      body:not(.m3d) #zc {
+        visibility: hidden;
+        transition: visibility 0s 0.4s;
+      }
       #back {
         font-weight: 700;
         border-color: var(--cy);
